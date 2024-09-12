@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empty Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: gray;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Website
+    </div>
+    <!-- <div style="position:fixed; right:15px; bottom:15px; display:block !important; z-index:99999999; width:350px; height:400px; max-height:100%; max-width:calc(100vw - 2*15px);">
+        <iframe src="https://sweden.on-courze.app/sv/schedule?mobileToolbar=true&amp;preview=false" frameborder="0" style="height:100%; width:100%; border-radius:8px;"></iframe>
+    </div> -->
+    <div id="oncourze-container" data-show="iframe" style="position:fixed; right:15px; bottom:15px; display:block !important; z-index:99999999; width:350px; height:400px; max-height:100%; max-width:calc(100vw - 2*15px); background-color: transparent;">
+        <iframe id="iframe-content" src="https://sweden.on-courze.app/sv/schedule" frameborder="0" style="height:100%; width:100%; border-radius:8px;"></iframe>
+    
+        <!-- Round toggle button in the upper left corner -->
+        <button id="toggle-button" style="
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 24px;
+            border: none;
+            display: block;
+            z-index: 100000000;
+            transition: background 0.3s ease;
+        ">&#10006;</button>
+    
+        <!-- Signup button following Material Design 2 principles -->
+        <button id="signup-button" style="
+            display:none;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            height: 56px;
+            width: auto;
+            padding: 0 16px;
+            border-radius: 28px;
+            background-color: #2b5cb5;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+            z-index: 100000000;
+        ">Sign up here</button>
+    </div>
+    
+    <!-- JavaScript to handle toggling -->
+    <script>
+        const iframeContent = document.getElementById('iframe-content');
+        const signupButton = document.getElementById('signup-button');
+        const toggleButton = document.getElementById('toggle-button');
+        const oncourzeContainer = document.getElementById('oncourze-container');
+
+        // Read the custom data attribute
+        const startState = oncourzeContainer.getAttribute('data-show');
+
+        // Based on the data attribute ('signup' or 'iframe'), control initial visibility
+        if (startState === "signup") {
+            iframeContent.style.display = "none";
+            signupButton.style.display = "block";
+            toggleButton.style.display = "none";
+        } else {
+            iframeContent.style.display = "block";
+            signupButton.style.display = "none";
+            toggleButton.style.display = "block";
+        }
+
+        toggleButton.addEventListener('click', function() {
+            if (iframeContent.style.display === "none") {
+                iframeContent.style.display = "block";
+                signupButton.style.display = "none";
+                toggleButton.style.display = "block";
+            } else {
+                iframeContent.style.display = "none";
+                signupButton.style.display = "block";
+                toggleButton.style.display = "none";  // Hide the toggle button when showing the signup button
+            }
+        });
+    
+        // Show the iframe content again when the signup button is clicked and show the toggle button again
+        signupButton.addEventListener('click', function() {
+            iframeContent.style.display = "block";
+            signupButton.style.display = "none";
+            toggleButton.style.display = "block";  // Show the toggle button again when iframe is visible
+        });
+    
+        // Change the toggle button style on hover
+        toggleButton.addEventListener('mouseover', function() {
+            toggleButton.style.background = 'rgba(0, 0, 0, 0.6)';
+        });
+        toggleButton.addEventListener('mouseout', function() {
+            toggleButton.style.background = 'rgba(0, 0, 0, 0.3)';
+        });
+    
+        // Change the signup button color on hover to follow Material Design 2
+        signupButton.addEventListener('mouseover', function() {
+            signupButton.style.backgroundColor = '#1e4692';  // Darker shade on hover
+        });
+        signupButton.addEventListener('mouseout', function() {
+            signupButton.style.backgroundColor = '#2b5cb5';  // Original blue color
+        });
+    </script>
+</body>
+</html>
